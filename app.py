@@ -7,10 +7,12 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-@app.route('/results', methods=['POST'])
+@app.route('/visualization', methods=['POST'])
 def results():
     word = request.form.get('query')
-    return render_template('results.html', word=word)
+    titles = ['自然言語処理', 'コロナウイルス']
+    links = ['http://abehiroshi.la.coocan.jp/']*2
+    return render_template('visualization.html', word=word, data=zip(titles, links))
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
