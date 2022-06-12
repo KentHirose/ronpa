@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/base.css">
     <title>論文検索</title>
 </head>
 <body>
     <h1>論文を検索するお</h1>
 
-    <form action="/visualization" method="post" onsubmit="return false;">
+    <form action="/results" method="post" onsubmit="return false;">
         <input type="text" name="query">
         <button type="button" onclick="submit();">検索</button>
     </form>
