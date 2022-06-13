@@ -10,7 +10,7 @@
 <body>
     <h1>検索ワード：{{ word }}</h1>
     <div id="display">
-    {% for title, link in data %}
+    {% for (title, link) in data %}
         <a href="{{ link }}" class="title">{{ title }}</a><br>
     {% endfor %}
     </div>

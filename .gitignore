@@ -3,3 +3,5 @@ __pycache__
 !.gitignore
 !.gitkeep
 entity_vector
+bert_model
+setup.sh

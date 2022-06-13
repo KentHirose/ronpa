@@ -1,6 +1,9 @@
-import numpy as np
-from gensim.models import KeyedVectors
+from keras_bert import load_trained_model_from_checkpoint
+import os
 
-model_dir = './entity_vector/entity_vector.model.bin'
-model = KeyedVectors.load_word2vec_format(model_dir, binary=True)
+base_dir = 'bert_model'
+config_path = os.path.join(base_dir, 'bert_config.json')
+checkpoint_path = os.path.join(base_dir, 'bert_config.json')
 
+bert = load_trained_model_from_checkpoint(config_path, checkpoint_path)
+print(bert.summary())
