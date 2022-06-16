@@ -1,6 +1,5 @@
 __pycache__
 .*
+model/*
 !.gitignore
 !.gitkeep
-bert_model
-setup.sh

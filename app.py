@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-import sys; sys.path.insert(0, './modules')
+import main_flow
 
 app = Flask(__name__)
 
@@ -9,22 +9,16 @@ def index():
 
 @app.route('/results', methods=['POST'])
 def results():
-    word = request.form.get('query')
-
-
-    # 仮 -------------------------------
-    # positions = [[0.2, 0.2], [0.7, 0.7]]
-    titles = ['自然言語処理', 'コロナウイルス']
-    links = ['http://abehiroshi.la.coocan.jp/']*2
-    positions = [[50, 50], [300, 300]]
-    colors = [[255, 0, 0], [0, 255, 255]]
-
+    query = request.form.get('query')
+    n_papers = 20
+    titles, links, positions, clusters = main_flow.flow(query, n_papers)
+    # colors = 
     return render_template(
         'results.html',
-        word=word,
+        query=query,
         data=zip(titles, links),
-        positions=positions,
-        colors=colors
+        positions=list(positions),
+        # colors=colors
         )
 
 if __name__ == '__main__':
