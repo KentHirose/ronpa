@@ -1,5 +1,6 @@
 import numpy as np
 from sklearn.decomposition import PCA
+from sklearn.preprocessing import MinMaxScaler
 
 def clustering(X: np.ndarray) -> np.ndarray:
     """クラスタリング. k-means?"""
@@ -25,3 +26,6 @@ def pca(data: np.ndarray) -> np.ndarray:
     pca=PCA(n_components=2)
     data=pca.fit_transform(data)
     return data
+
+def normalize(X: np.ndarray) -> np.ndarray:
+    return MinMaxScaler((0, 100)).fit_transform(X)

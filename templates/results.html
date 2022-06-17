@@ -14,5 +14,18 @@
         <a href="{{ link }}" class="title">{{ title }}</a><br>
     {% endfor %}
     </div>
+    <script>
+        let positions = {{ positions | tojson }};
+
+        let elements = document.getElementsByClassName('title');
+        let width = document.getElementById('display').clientWidth;
+        let height = document.getElementById('display').clientHeight;
+
+        for (var i in elements) {
+            console.log(positions[i][0] * width)
+            elements[i].style.top = positions[i][0] + '%';
+            elements[i].style.left = positions[i][1] + '%';
+        };
+    </script>
 </body>
 </html>

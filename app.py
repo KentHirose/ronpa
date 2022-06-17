@@ -17,7 +17,7 @@ def results():
         'results.html',
         query=query,
         data=zip(titles, links),
-        positions=list(positions),
+        positions = [list(map(int, pos)) for pos in positions],
         # colors=colors
         )
 

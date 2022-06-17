@@ -5,12 +5,12 @@ body {
 
 #display {
     /* width: 100%; */
-    height: 25em;
+    height: 40em;
     border: 1px solid;
     position: relative;
 }
 
 .title {
     position: absolute;
-    /* transform: translatex(-50%); */
+    transform: translatex(-50%);
 }

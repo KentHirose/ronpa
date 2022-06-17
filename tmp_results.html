@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/css/base.css">
+    <link rel="stylesheet" href="../static/css/base.css" type="text/css">
     <title>論文検索</title>
 </head>
 <body>
@@ -24,6 +24,11 @@
             // elements[i].style.left = positions[i][1] + 'px';
             // elements[i].style.color = "rgb(" + colors[i] + ")";
         // };
+        for (var i in elements) {
+            elements[i].style.top = positions[i][0] + 'px';
+            elements[i].style.left = positions[i][1] + 'px';
+            // elements[i].style.top = parseInt(positions[i][0]*width) + 'px';
+            // elements[i].style.left = parseInt(positions[i][1]*height) + 'px';
     </script>
 </body>
 </html>
