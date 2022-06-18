@@ -2,6 +2,86 @@ body {
     text-align: center;
 }
 
+header {
+    height: 50px;
+}
+
+#belt {
+    height: 50px;
+    background-color: rgb(149, 149, 149);
+    border: none;
+}
+
+#search-area {
+    display: flex;
+    height: 50px;
+    padding: 10px;
+    /* border: solid 1px rgb(255, 0, 0); */
+    align-items: center;
+    justify-content: center;
+    
+}
+
+#search-button {
+    height: 100%;
+    background-color: transparent;
+    border: none;
+}
+
+#mushimegane {
+    height: 100%;
+}
+
+#text-box {
+    width: 400px;
+    height: 100%;
+    line-height: 50px;
+}
+
+#num {
+    height: 100%;
+}
+
+.item-title {
+    background-color: rgb(159, 226, 255);
+    width: 500px;
+    padding: 3px;
+    margin:0 auto;
+    margin-bottom: 10px;
+}
+
+.item-col {
+    display: inline-block;
+    text-align: left;
+    vertical-align: top;
+    margin: 5px;
+}
+
+.item {
+    margin-bottom: 50px;
+    /* border: solid 1px; */
+}
+
+.item-category {
+    margin-bottom: 50px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #area {
     width: 100%;
     height: 40em;
@@ -13,6 +93,7 @@ body {
     height: 90%;
     border: 1px solid rgb(255, 62, 62);
     position: relative;
+    transform: scale(1);
 }
 
 .title {
