@@ -11,6 +11,18 @@ def tokenize(text):
     return wakati.parse(text).strip().split()
 
 
+# janome -------------
+from janome.tokenizer import Tokenizer
+def tokenize(text):
+    t = Tokenizer()
+    tokens = t.tokenize(text)
+    docs=[]
+    for token in tokens:
+        docs.append(token.surface)
+    return docs
+# --------------------
+
+
 def sent2vec(sentences: list) -> np.ndarray:
     """
     文章からベクトルを生成

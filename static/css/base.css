@@ -1,5 +1,4 @@
 body {
-    /* background-color: rgb(255, 226, 171); */
     text-align: center;
 }
 
@@ -19,6 +18,5 @@ body {
 .title {
     position: absolute;
     font-size: 10px;
-    display: inline-block;
-    transform: translatex(-50%);
+    transform: translate(-50%, -50%);
 }
