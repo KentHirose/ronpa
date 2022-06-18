@@ -20,7 +20,7 @@
             <input type="text" name="query" id="text-box">
             <input type="number" name="n_papers" min="1" max="50" step="1" id="num" value="20">
         </div>
-    </form>
+    <!-- </form> -->
     <h1>論文検索可視化</h1>
     <p>J-STAGEから論文を取得し、二次元平面上に描画します。検索ワード、条件を入力してください。</p>
     <br>
@@ -28,25 +28,19 @@
         <p class="item-title">資料種別</p>
         <div>
             <div class="item-col">
-                <input type="checkbox" name="1" value="1">
-                <label for="t1">ジャーナル</label><br>
-                <input type="checkbox" name="3" value="1">
-                <label for="t3">会議録・要旨集</label><br>
-                <input type="checkbox" name="5" value="1">
-                <label for="t5">その他</label>
+                <label><input type="checkbox" name="doc_type" value="1">ジャーナル</label><br>
+                <label><input type="checkbox" name="doc_type" value="2">会議録・要旨集</label><br>
+                <label><input type="checkbox" name="doc_type" value="3">その他</label><br>
             </div>
             <div class="item-col">
-                <input type="checkbox" name="2" value="1">
-                <label for="t2">研究報告書・技術報告書</label><br>
-                <input type="checkbox" name="4" value="1">
-                <label for="t4">解説誌・一般情報誌</label><br>
+                <label><input type="checkbox" name="doc_type" value="4">研究報告書・技術報告書</label><br>
+                <label><input type="checkbox" name="doc_type" value="5">解説誌・一般情報誌</label><br>
             </div>
         </div>
     </div>
     <div class="item">
         <p class="item-title">査読有無</p>
-        <input type="checkbox" name="option" value="1">
-        <label for="option">査読あり</label>
+        <label><input type="checkbox" name="option" value="1">査読あり</label>
     </div>
     <div class="item">
         <p class="item-title">分野</p>
@@ -54,72 +48,55 @@
             <div class="item-col">
                 <div class="item-category">
                     <p><u>基礎科学系</u></p>
-                    <input type="checkbox" name="c1" value="1">
-                    <label for="c1">数学</label><br>
-                    <input type="checkbox" name="c2" value="1">
-                    <label for="c2">物理</label><br>
-                    <input type="checkbox" name="c3" value="1">
-                    <label for="c3">科学</label><br>
-                    <input type="checkbox" name="c4" value="1">
-                    <label for="c4">地球科学・天文学</label><br>
+                        <label><input type="checkbox" name="category" value="1">数学</labeltion><br>
+                        <label><input type="checkbox" name="category" value="2">物理</label><br>
+                        <label><input type="checkbox" name="category" value="3">科学</label><br>
+                        <label><input type="checkbox" name="category" value="4">地球科学・天文学</label><br>
+                        <br>
                 </div>
                 <div class="item-category">
-                    <p><u>工学系</u></p>
-                    <input type="checkbox" name="c1" value="1">
-                    <label for="c1">一般工学・総合工学</label><br>
-                    <input type="checkbox" name="c2" value="1">
-                    <label for="c2">ナノ・材料科学</label><br>
-                    <input type="checkbox" name="c3" value="1">
-                    <label for="c3">建築学・土木工学</label><br>
-                    <input type="checkbox" name="c4" value="1">
-                    <label for="c4">機械工学</label><br>
-                    <input type="checkbox" name="c5" value="1">
-                    <label for="c5">電気電子工学</label><br>
-                    <br>
+                    <p><u>ライフ系</u></p>
+                    <label><input type="checkbox" name="category" value="5">生物学・生命科学・基礎医学​</label><br>
+                    <label><input type="checkbox" name="category" value="6">農学・食品科学​</label><br>
                     <br>
                 </div>
                 <div class="item-category">
                     <p><u>医学・保健衛生系</u></p>
-                    <input type="checkbox" name="c1" value="1">
-                    <label for="c1">一般医学</label><br>
-                    <input type="checkbox" name="c2" value="1">
-                    <label for="c2">臨床医学</label><br>
-                    <input type="checkbox" name="c3" value="1">
-                    <label for="c3">歯学</label><br>
-                    <input type="checkbox" name="c4" value="1">
-                    <label for="c4">薬学</label><br>
+                    <label><input type="checkbox" name="category" value="7">一般医学</label><br>
+                    <label><input type="checkbox" name="category" value="8">臨床医学</label><br>
+                    <label><input type="checkbox" name="category" value="9">歯学</label><br>
+                    <label><input type="checkbox" name="category" value="10">薬学</label><br>
                 </div>
             </div>
             <div class="item-col">
                 <div class="item-category">
-                    <p><u>ライフ系</u></p>
-                    <input type="checkbox" name="c1" value="1">
-                    <label for="c1">生物学・生命科学・基礎医学​</label><br>
-                    <input type="checkbox" name="c2" value="1">
-                    <label for="c2">農学・食品科学​</label><br>
-                    <br>
-                    <br>
+                    <p><u>工学系</u></p>
+                    <label><input type="checkbox" name="category" value="11">一般工学・総合工学</label><br>
+                    <label><input type="checkbox" name="category" value="12">ナノ・材料科学</label><br>
+                    <label><input type="checkbox" name="category" value="13">建築学・土木工学</label><br>
+                    <label><input type="checkbox" name="category" value="14">機械工学</label><br>
+                    <label><input type="checkbox" name="category" value="15">電気電子工学</label><br>
+                </div>
+                <div class="item-category">
+                    <p><u>学祭科学系</u></p>
+                    <label><input type="checkbox" name="category" value="16">一般工学・総合工学</label><br>
+                    <label><input type="checkbox" name="category" value="17">ナノ・材料科学</label><br>
+                    <label><input type="checkbox" name="category" value="18">建築学・土木工学</label><br>
                 </div>
                 <div class="item-category">
                     <p><u>人文・社会科学系​</u></p>
-                    <input type="checkbox" name="c1" value="1">
-                    <label for="c1">哲学・宗教​</label><br>
-                    <input type="checkbox" name="c2" value="1">
-                    <label for="c2">文学・言語学・芸術学​</label><br>
-                    <input type="checkbox" name="c3" value="1">
-                    <label for="c3">人類学・史学・地理学​​</label><br>
-                    <input type="checkbox" name="c4" value="1">
-                    <label for="c4">法学・政治学​</label><br>
-                    <input type="checkbox" name="c5" value="1">
-                    <label for="c5">経済学・経営学​</label><br>
-                    <input type="checkbox" name="c5" value="1">
-                    <label for="c5">社会学​</label><br>
-                    <input type="checkbox" name="c5" value="1">
-                    <label for="c5">心理学・教育学</label><br>
+                    <label><input type="checkbox" name="category" value="19">哲学・宗教​</label><br>
+                    <label><input type="checkbox" name="category" value="20">文学・言語学・芸術学​</label><br>
+                    <label><input type="checkbox" name="category" value="21">人類学・史学・地理学​​</label><br>
+                    <label><input type="checkbox" name="category" value="22">法学・政治学​</label><br>
+                    <label><input type="checkbox" name="category" value="23">経済学・経営学​</label><br>
+                    <label><input type="checkbox" name="category" value="24">社会学​</label><br>
+                    <label><input type="checkbox" name="category" value="25">心理学・教育学</label><br>
                 </div>
             </div>
         </div>
     </div>
+    </form>
 
 </body>
 </html>

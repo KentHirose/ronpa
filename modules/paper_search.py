@@ -2,23 +2,38 @@ import requests
 from bs4 import BeautifulSoup
 import urllib.parse
 
-def search(query: str, n_papers: int = 20) -> list:
+def search(
+    query: str,
+    n_papers: int,
+    doc_type: list,
+    category: list,
+    option: bool,
+    order_input: int,
+    document_type_list: list,
+    category_list: list,
+) -> list:
     """
     j-stage からクエリにヒットする論文をn個取得する
-
-    Args:
-        query (str): クエリ
-        n_papers (int, optional): 取得する論文の数
-
-    Returns:
-        list: タイトル, URL, アブストラクトをまとめたリスト
     """
     quote = urllib.parse.quote(query)
+    document_type = ""
+    cat_text = ""
+    for i in doc_type:
+        document_type += document_type_list[i]
+    for w in category:
+        cat_text += category_list[w]
 
-    # url = ("https://www.jstage.jst.go.jp/result/global/-char/ja?fromPage=%2Fsearch%2Fglobal%2F_search%2F-char%2Fja&freeText=" + quote + "&item1=&word1=&cond1=&notCond1=&item2=&word2=&cond2=&notCond2=&item3=&word3=&cond3=&notCond3=&item4=&word4=&notCond4=&count=50&from=" + str(page_num) + "&order=&type=&license=&attribute=&languageType=ja&option=&yearfrom=&yearto=&category=&cdjournal=&favorite=&translate=&bglobalSearch=false&sortby=1&showRecodsH=50&showRecords=20")
-    url = ("https://www.jstage.jst.go.jp/result/global/-char/ja?fromPage=%2Fsearch%2Fglobal%2F_search%2F-char%2Fja&freeText=" + quote + "&item1=&word1=&cond1=&notCond1=&item2=&word2=&cond2=&notCond2=&item3=&word3=&cond3=&notCond3=&item4=&word4=&notCond4=&count=50&from=&order=&type=&license=&attribute=&languageType=ja&option=&yearfrom=&yearto=&category=&cdjournal=&favorite=&translate=&bglobalSearch=false&sortby=1&showRecodsH=50&showRecords=20")
+    document_type = document_type.lstrip("%2C")
+    cat_text = cat_text.lstrip("%2C")
+
+    if option:
+        option = "0"
+    else:
+        option = ""
+
+    order = str(order_input + 1)
+    url = ("https://www.jstage.jst.go.jp/result/global/-char/ja?fromPage=%2Fsearch%2Fglobal%2F_search%2F-char%2Fja&freeText=" + str(quote) + "&item1=&word1=&cond1=&notCond1=&item2=&word2=&cond2=&notCond2=&item3=&word3=&cond3=&notCond3=&item4=&word4=&notCond4=&count=50&from=&order=" + str(order) + "&type=" + str(document_type) + "&license=&attribute=&languageType=ja&option=" + str(option) + "&yearfrom=&yearto=&category=" + str(cat_text) + "&cdjournal=&favorite=&translate=&bglobalSearch=false&sortby=1&showRecodsH=50&showRecords=20")
     res = requests.get(url + query)
-    # print(url)
     
     #HTMLからBeautifulSoupオブジェクトを作る
     soup = BeautifulSoup(res.text, "html.parser") 
