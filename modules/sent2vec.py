@@ -5,16 +5,10 @@ import MeCab
 doc2vec = Doc2Vec.load("model/jawiki.doc2vec.dbow300d.model")
 mecab = MeCab.Tagger("-Owakati")
 
-# ------
-from janome.tokenizer import Tokenizer
-def sep_by_janome(text):
-    t = Tokenizer()
-    tokens = t.tokenize(text)
-    docs=[]
-    for token in tokens:
-        docs.append(token.surface)
-    return docs
-# -------
+def tokenize(text):
+    wakati = MeCab.Tagger("-O wakati")
+    wakati.parse("")
+    return wakati.parse(text).strip().split()
 
 
 def sent2vec(sentences: list) -> np.ndarray:
@@ -27,5 +21,5 @@ def sent2vec(sentences: list) -> np.ndarray:
     Returns:
         np.ndarray: ベクトル (n_sentences, n_dim)
     """
-    vecs = [doc2vec.infer_vector(sep_by_janome(sent)) for sent in sentences]
+    vecs = [doc2vec.infer_vector(tokenize(sent)) for sent in sentences]
     return np.array(vecs)

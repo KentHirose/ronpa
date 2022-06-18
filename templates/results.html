@@ -11,20 +11,25 @@
 <body>
     <h1>検索ワード：{{ query }}</h1>
     {# <div id="area" cmanOMat="area"> #}
-        <div id="display" cmanOMat="movearea">
+        <div id="display">
         {% for (title, link) in data %}
             <a href="{{ link }}" class="title">{{ title }}</a><br>
         {% endfor %}
         </div>
     {# </div> #}
+
     <script>
         let positions = {{ positions | tojson }};
-        let elements = document.getElementsByClassName('title');
+        let colors = {{ colors | tojson }};
+        var elements = document.getElementsByClassName('title');
+        elements = [].slice.call( elements);
 
         for (var i in elements) {
             elements[i].style.top = positions[i][0] + '%';
             elements[i].style.left = positions[i][1] + '%';
+            elements[i].style.backgtoundColor = "rgb(" + colors[i] + ")";
         };
     </script>
+    <script src="../static/js/move.js"></script>
 </body>
 </html>
