@@ -3,6 +3,18 @@ import main_flow
 
 app = Flask(__name__)
 
+colors_rgb = [
+    (255, 128, 128),
+    (128, 255, 128),
+    (128, 128, 255),
+    (255, 255, 128),
+    (255, 128, 255),
+    (128, 255, 255),
+    (128, 128, 128),
+    (128, 128, 128),
+    (128, 128, 128),
+    (128, 128, 128)]
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -12,7 +24,7 @@ def results():
     query = request.form.get('query')
     n_papers = 20
     titles, links, positions, clusters = main_flow.flow(query, n_papers)
-    # colors = 
+    # colors = colors_rgb[clusters]
     return render_template(
         'results.html',
         query=query,

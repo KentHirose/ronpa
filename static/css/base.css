@@ -1,16 +1,17 @@
 body {
-    background-color: rgb(255, 226, 171);
+    /* background-color: rgb(255, 226, 171); */
     text-align: center;
 }
 
 #display {
     /* width: 100%; */
-    height: 40em;
+    height: 55em;
     border: 1px solid;
     position: relative;
 }
 
 .title {
     position: absolute;
+    font-size: 10px;
     transform: translatex(-50%);
 }
