@@ -5,19 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/css/base.css">
-    {# <script src="../static/js/cmanObjMove_v091.js"></script> #}
+    <script src="../static/js/cmanObjMove_v091.js" charset="utf-8"></script>
     <title>論文検索</title>
 </head>
 <body>
     <h1>検索ワード：{{ query }}</h1>
-    {# <div id="area" cmanOMat="area"> #}
-        <div id="display">
+    <div id="area" cmanOMat="area">
+        <div id="display" cmanOMat="movearea">
         {% for (title, link) in data %}
-            <a href="{{ link }}" class="title">{{ title }}</a><br>
+            <nobr><a href="{{ link }}" class="title">{{ title }}</a></nobr>
         {% endfor %}
         </div>
-    {# </div> #}
-
+    </div>
     <script>
         let positions = {{ positions | tojson }};
         let colors = {{ colors | tojson }};
@@ -30,6 +29,5 @@
             elements[i].style.backgtoundColor = "rgb(" + colors[i] + ")";
         };
     </script>
-    <script src="../static/js/move.js"></script>
 </body>
 </html>

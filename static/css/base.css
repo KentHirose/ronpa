@@ -3,15 +3,22 @@ body {
     text-align: center;
 }
 
-#display {
+#area {
     width: 100%;
     height: 40em;
     border: 1px solid;
+}
+
+#display {
+    width: 90%;
+    height: 90%;
+    border: 1px solid rgb(255, 62, 62);
     position: relative;
 }
 
 .title {
     position: absolute;
     font-size: 10px;
+    display: inline-block;
     transform: translatex(-50%);
 }
