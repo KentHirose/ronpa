@@ -9,11 +9,12 @@
     <title>論文検索</title>
 </head>
 <body>
-    {# <input id="slider1" type="range" value="50" min="1" max="200" onchange="plot();"/> #}
     <div id="area" cmanOMat="area" data-action="zoom">
         <div id="display" cmanOMat="move">
-        {% for (title, link) in data %}
-            <nobr><a href="{{ link }}" class="title">{{ title }}</a></nobr>
+        {% for (title, link, balloon) in data %}
+            <div class="balloonoya"><nobr><a href="{{ link }}" class="title">{{ title }}</a></nobr>
+            <span class="balloon">{{ balloon }}</span>
+</div>
         {% endfor %}
         </div>
     </div>
@@ -44,8 +45,7 @@
             }
             plot(scale);
         };
-        plot(1.)
+        plot(scale)
         </script>
-    {# <script src="../static/js/view.js"></script> #}
 </body>
 </html>

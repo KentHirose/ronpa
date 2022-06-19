@@ -50,6 +50,20 @@ def search(
             abstract_element[w] = [title_url_element[w].get_text()]
     abstract_element = sum(abstract_element, [])
 
+    # authortagsのBSオブジェクトを取得
+    authortags_element = []
+    for q in range(50):
+        authortags_element.append(soup.select("#search-resultslist-wrap > ul > li:nth-of-type("+ str(q+1) + ") > div.searchlist-authortags.customTooltip"))
+    # abst_listにabstを追加、abstがない場合はタイトルを追加
+    authortags_element = sum(authortags_element, [])
+
+    # additionalのBSオブジェクトを取得
+    additional_element = []
+    for q in range(50):
+        additional_element.append(soup.select("#search-resultslist-wrap > ul > li:nth-of-type("+ str(q+1) + ") > div.searchlist-additional-info"))
+    # abst_listにabstを追加、abstがない場合はタイトルを追加
+    additional_element = sum(additional_element, [])
+
     # title,url,abstをlistに入れる
     search_results_list = []
     for e in range(n_papers):
@@ -62,6 +76,10 @@ def search(
             abstract = abstract_element[e].get_text().replace("\n","").replace("\t","").replace("抄録全体を表示","")
         else:
             abstract = abstract_element[e]
-        search_results_list.append([title, url, abstract])
+        # authortagsのテキスト部分飲み取得
+        author = authortags_element[e].get_text().replace("\n","").replace("\t","")
+        # additionalのテキスト部分飲み取得
+        additional = additional_element[e].get_text().replace("\n","").replace("\t","")
+        search_results_list.append([title, url, abstract, author, additional])
 
     return list(zip(*search_results_list))

@@ -80,3 +80,6 @@ def lang_judg(search_results_list: list) -> None:
 #     ["タイトル2", 0, 'aaaaaaaabbbbbbbbbbbbbb']]
 # lang_judg(l)
 # print(l)
+
+def make_balloon(writer, additional):
+    return [f'著者:{w}\n\n{add}' for w, add in zip(writer, additional)]

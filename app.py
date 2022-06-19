@@ -16,13 +16,13 @@ def results():
     params['doc_type'] = request.form.getlist('doc_types', type=int)
     params['category'] = request.form.getlist('category', type=int)
     params['order_input'] = 0
-    titles, links, positions, colors = main_flow.flow(params)
+    titles, links, positions, colors, balloon = main_flow.flow(params)
     return render_template(
         'results.html',
         query=params['query'],
-        data=zip(titles, links),
-        positions = [list(map(int, pos)) for pos in positions],
-        colors=colors
+        data=zip(titles, links, balloon),
+        positions=[list(map(int, pos)) for pos in positions],
+        colors=colors,
         )
 
 if __name__ == '__main__':

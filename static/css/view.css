@@ -17,8 +17,22 @@ body{
 
 .title {
     position: absolute;
-    font-size: 14px;
+    font-size: 18px;
     transform: translate(-50%, -50%);
     padding: 2px 10px;
     border-radius: 1em;
+}
+
+.balloonoya:hover .balloon {
+    display: inline;                /* インライン要素として表示 */
+}
+.balloon {
+    position: absolute;                /* 親要素を基準 */
+    display: none;                        /* 要素を非表示 */
+    padding: 2px;                         /* テキストの前後の余白 */
+    background-color: rgba(102, 102, 255, 0.50);       /* 背景色（透明度） */
+    width:180px;                          /* 吹き出し全体の幅 */
+    right : 0;
+    top:0;                           /* 表示位置 */
+    font-size: 80%;                       /* 文字サイズ */
 }

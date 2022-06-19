@@ -2,7 +2,7 @@ import json
 import sys; sys.path.insert(0, './modules')
 from paper_search import search
 from sent2vec import sent2vec
-from tours import pca, clustering, normalize, intervel
+from tours import pca, clustering, normalize, intervel, make_balloon
 
 with open('config.json') as f:
     config = json.load(f)
@@ -13,7 +13,7 @@ document_type_list = query_text['document_type']
 category_list = query_text['category']
 
 def flow(search_options: dict):
-    titles, links, abstracts = search(
+    titles, links, abstracts, writer, additional = search(
         **search_options,
         document_type_list=document_type_list,
         category_list=category_list
@@ -25,4 +25,5 @@ def flow(search_options: dict):
     positions = normalize(positions)
     clusters = clustering(vectors)
     colors = [colors_rgb[int(c)] for c in clusters]
-    return titles, links, positions, colors
+    balloon = make_balloon(writer, additional)
+    return titles, links, positions, colors, balloon
