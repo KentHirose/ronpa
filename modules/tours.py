@@ -53,33 +53,26 @@ def intervel(data: np.ndarray) -> np.ndarray:
                         data[i][1]-=0.1
     return data
 
-def lang_judg(search_results_list: list) -> None:
-    """アブストラクトが英語かどうかを判定し、英語だった場合タイトルに置き換える"""
-    deliete = re.compile('[!"#$%&\'\\\\()*+,-./:;<=>?@[\\]^_`{|}~「」〔〕""〈〉『』【】＆＊・（）＄＃＠。、？！｀＋￥％]')
-    cleaned_text = list(deliete.sub('', search_results_list[2]))
-    num = int(len(cleaned_text)* 0.3)
-    nums = random.randint(0,(len(cleaned_text)-1))
-    count = 0
-    word_count = 0
-    while word_count <= num:
-        judge_word = cleaned_text[nums]
-        ans = re.match('^[a-zA-Z]+$', judge_word)
-        cleaned_text.pop(nums)
-        print(cleaned_text)
-        if ans != 'None':
-            count += 1
-            word_count += 1
-        elif ans == "None":
-            word_count += 1
-    if count > int(num/2):
-        search_results_list[2] = search_results_list[0]
-
-
-# l = [
-#     ["タイトル1", 0, '英あああああああああああああああああああ'],
-#     ["タイトル2", 0, 'aaaaaaaabbbbbbbbbbbbbb']]
-# lang_judg(l)
-# print(l)
+# def lang_judg(search_results_list: list) -> None:
+#     """アブストラクトが英語かどうかを判定し、英語だった場合タイトルに置き換える"""
+#     deliete = re.compile('[!"#$%&\'\\\\()*+,-./:;<=>?@[\\]^_`{|}~「」〔〕""〈〉『』【】＆＊・（）＄＃＠。、？！｀＋￥％]')
+#     cleaned_text = list(deliete.sub('', search_results_list[2]))
+#     num = int(len(cleaned_text)* 0.3)
+#     nums = random.randint(0,(len(cleaned_text)-1))
+#     count = 0
+#     word_count = 0
+#     while word_count <= num:
+#         judge_word = cleaned_text[nums]
+#         ans = re.match('^[a-zA-Z]+$', judge_word)
+#         cleaned_text.pop(nums)
+#         print(cleaned_text)
+#         if ans != 'None':
+#             count += 1
+#             word_count += 1
+#         elif ans == "None":
+#             word_count += 1
+#     if count > int(num/2):
+#         search_results_list[2] = search_results_list[0]
 
 def make_balloon(writer, additional):
     return [f'著者:{w}\n\n{add}' for w, add in zip(writer, additional)]

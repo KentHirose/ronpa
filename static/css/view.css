@@ -24,15 +24,15 @@ body{
 }
 
 .balloonoya:hover .balloon {
-    display: inline;                /* インライン要素として表示 */
+    display: inline;
 }
 .balloon {
-    position: absolute;                /* 親要素を基準 */
-    display: none;                        /* 要素を非表示 */
-    padding: 2px;                         /* テキストの前後の余白 */
-    background-color: rgba(102, 102, 255, 0.50);       /* 背景色（透明度） */
-    width:180px;                          /* 吹き出し全体の幅 */
+    position: absolute;
+    display: none;
+    padding: 2px;
+    background-color: rgba(102, 102, 255, 0.50);
+    width:180px;
     right : 0;
-    top:0;                           /* 表示位置 */
-    font-size: 80%;                       /* 文字サイズ */
+    top:0;
+    font-size: 80%;
 }
