@@ -4,15 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/css/base.css">
-    <link rel="stylesheet" href="../static/css/zoom.css">
+    <link rel="stylesheet" href="../static/css/view.css">
     <script src="../static/js/cmanObjMove_v091.js" charset="utf-8"></script>
     <title>論文検索</title>
 </head>
 <body>
-    <h1>検索ワード：{{ query }}</h1>
+    {# <input id="slider1" type="range" value="50" min="1" max="200" onchange="plot();"/> #}
     <div id="area" cmanOMat="area" data-action="zoom">
-        <div id="display" cmanOMat="movearea">
+        <div id="display" cmanOMat="move">
         {% for (title, link) in data %}
             <nobr><a href="{{ link }}" class="title">{{ title }}</a></nobr>
         {% endfor %}
@@ -22,15 +21,31 @@
         let positions = {{ positions | tojson }};
         let colors = {{ colors | tojson }};
         var elements = document.getElementsByClassName('title');
-        elements = [].slice.call( elements);
+        elements = [].slice.call( elements );
+        var scale = 1.
+        function plot(scale) {
+            var slider = document.getElementById("slider1");
+            let positions = {{ positions | tojson }};
+            let colors = {{ colors | tojson }};
+            var elements = document.getElementsByClassName('title');
+            elements = [].slice.call( elements);
 
-        for (var i in elements) {
-            elements[i].style.top = positions[i][1] + '%';
-            elements[i].style.left = positions[i][0] + '%';
-            elements[i].style.backgroundColor = "rgb(" + colors[i] + ")";
+            for (var i in elements) {
+                elements[i].style.top = positions[i][1]*scale-50*scale+50 + '%';
+                elements[i].style.left = positions[i][0]*scale-50*scale+50 + '%';
+                elements[i].style.backgroundColor = "rgba(" + colors[i] + ", 0.5)";
+            };
         };
-    </script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" type="text/javascript"></script>
-    <script src="../static/js/zoom.js" type="text/javascript"></script>
+        window.onmousewheel = function(event) {
+            if (event.deltaY > 0) {
+                scale = Math.min(5, scale + 0.1);
+            } else {
+                scale = Math.max(0.3, scale - 0.1);
+            }
+            plot(scale);
+        };
+        plot(1.)
+        </script>
+    {# <script src="../static/js/view.js"></script> #}
 </body>
 </html>

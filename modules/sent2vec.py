@@ -12,14 +12,14 @@ def tokenize(text):
 
 
 # janome -------------
-from janome.tokenizer import Tokenizer
-def tokenize(text):
-    t = Tokenizer()
-    tokens = t.tokenize(text)
-    docs=[]
-    for token in tokens:
-        docs.append(token.surface)
-    return docs
+# from janome.tokenizer import Tokenizer
+# def tokenize(text):
+#     t = Tokenizer()
+#     tokens = t.tokenize(text)
+#     docs=[]
+#     for token in tokens:
+#         docs.append(token.surface)
+#     return docs
 # --------------------
 
 
