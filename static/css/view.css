@@ -23,7 +23,7 @@ body{
     border-radius: 1em;
 }
 
-.balloonoya:hover .balloon {
+.balloon-oya:hover .balloon {
     display: inline;
 }
 

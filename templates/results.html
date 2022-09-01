@@ -5,38 +5,63 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/css/view.css">
-    <script src="../static/js/cmanObjMove_v091.js" charset="utf-8"></script>
     <title>ろんぱ</title>
 </head>
 <body>
-    <div id="area" cmanOMat="area" data-action="zoom">
-        <div id="display" cmanOMat="move">
+    <div id="area">
         {% for (title, link, balloon) in data %}
-            <div class="balloonoya"><nobr><a href="{{ link }}" class="title">{{ title }}</a></nobr>
+            <div class="balloon-oya">
+                <nobr><a href="{{ link }}" class="title" target="_blank" rel="noopener noreferrer">{{ title }}</a></nobr>
                 <span class="balloon">{{ balloon }}</span>
             </div>
         {% endfor %}
-        </div>
     </div>
     <script>
+        var isMousedDown = false;
+        var tmpX;
+        var tmpY;
+        var w = screen.width;
+        var h = screen.height;
+
+        window.addEventListener('mousedown', e => {
+            isMousedDown = true;
+            tmpX = e.pageX;
+            tmpY = e.pageY;
+        });
+
+        window.addEventListener('mouseup', () => {
+            isMousedDown = false;
+        });
+
         let positions = {{ positions | tojson }};
         let colors = {{ colors | tojson }};
-        var elements = document.getElementsByClassName('title');
-        elements = [].slice.call( elements );
         var scale = 1.
-        function plot(scale) {
-            var slider = document.getElementById("slider1");
-            let positions = {{ positions | tojson }};
-            let colors = {{ colors | tojson }};
-            var elements = document.getElementsByClassName('title');
-            elements = [].slice.call( elements);
+        var elements = document.getElementsByClassName('title');
 
+        function plot(scale) {
+            elements = [].slice.call(elements);
             for (var i in elements) {
-                elements[i].style.top = positions[i][1]*scale-50*scale+50 + '%';
-                elements[i].style.left = positions[i][0]*scale-50*scale+50 + '%';
+                elements[i].style.left = positions[i][0]*scale + 100*offsetX/w - 50*scale + 50 + '%';
+                elements[i].style.top = positions[i][1]*scale + 100*offsetY/h - 50*scale + 50 + '%';
                 elements[i].style.backgroundColor = "rgba(" + colors[i] + ", 0.5)";
             };
         };
+
+        var offsetX = 0.;
+        var offsetY = 0.;
+        window.addEventListener('mousemove', e => {
+            if (isMousedDown) {
+                offsetX += e.pageX - tmpX;
+                offsetY += e.pageY - tmpY;
+                offsetX = Math.sign(offsetX) * Math.min(Math.abs(offsetX), scale*w/2);
+                offsetY = Math.sign(offsetY) * Math.min(Math.abs(offsetY), scale*h/2);
+                tmpX = e.pageX;
+                tmpY = e.pageY;
+                plot(scale);
+            }
+        });
+
+
         window.onmousewheel = function(event) {
             if (event.deltaY > 0) {
                 scale = Math.min(5, scale + 0.1);
@@ -45,7 +70,8 @@
             }
             plot(scale);
         };
+
         plot(scale)
-        </script>
+    </script>
 </body>
 </html>
