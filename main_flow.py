@@ -18,6 +18,7 @@ def flow(search_options: dict):
         document_type_list=document_type_list,
         category_list=category_list
         )
+    print('n_papers', len(titles))
     vectors = sent2vec(abstracts)
     vectors_2d = pca(vectors)
     positions = normalize(vectors_2d)

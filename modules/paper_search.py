@@ -34,52 +34,27 @@ def search(
     order = str(order_input + 1)
     url = ("https://www.jstage.jst.go.jp/result/global/-char/ja?fromPage=%2Fsearch%2Fglobal%2F_search%2F-char%2Fja&freeText=" + str(quote) + "&item1=&word1=&cond1=&notCond1=&item2=&word2=&cond2=&notCond2=&item3=&word3=&cond3=&notCond3=&item4=&word4=&notCond4=&count=50&from=&order=" + str(order) + "&type=" + str(document_type) + "&license=&attribute=&languageType=ja&option=" + str(option) + "&yearfrom=&yearto=&category=" + str(cat_text) + "&cdjournal=&favorite=&translate=&bglobalSearch=false&sortby=1&showRecodsH=50&showRecords=20")
     res = requests.get(url + query)
-    
+
     #HTMLからBeautifulSoupオブジェクトを作る
     soup = BeautifulSoup(res.text, "html.parser") 
     # 検索結果のタイトルとリンクのBSオブジェクトを取得
     title_url_element = soup.select('#search-resultslist-wrap > ul > li > .searchlist-title > a')
 
     # abstractのBSオブジェクトを取得
-    abstract_element = []
-    for q in range(50):
-        abstract_element.append(soup.select("#search-resultslist-wrap > ul > li:nth-of-type("+ str(q+1) + ") > div.showabstractbox.content > div.inner-content.abstract"))
-    # abst_listにabstを追加、abstがない場合はタイトルを追加
-    for w in range(len(abstract_element)):
-        if abstract_element[w] == []:
-            abstract_element[w] = [title_url_element[w].get_text()]
-    abstract_element = sum(abstract_element, [])
-
-    # authortagsのBSオブジェクトを取得
-    authortags_element = []
-    for q in range(50):
-        authortags_element.append(soup.select("#search-resultslist-wrap > ul > li:nth-of-type("+ str(q+1) + ") > div.searchlist-authortags.customTooltip"))
-    # abst_listにabstを追加、abstがない場合はタイトルを追加
-    authortags_element = sum(authortags_element, [])
-
-    # additionalのBSオブジェクトを取得
-    additional_element = []
-    for q in range(50):
-        additional_element.append(soup.select("#search-resultslist-wrap > ul > li:nth-of-type("+ str(q+1) + ") > div.searchlist-additional-info"))
-    # abst_listにabstを追加、abstがない場合はタイトルを追加
-    additional_element = sum(additional_element, [])
-
-    # title,url,abstをlistに入れる
     search_results_list = []
-    for e in range(n_papers):
-        # タイトルのテキスト部分のみ取得
-        title = title_url_element[e].get_text() 
-        # リンクのみを取得し、余分な部分を削除する
-        url = title_url_element[e].get('href').replace('/url?q=','')
-        # abstractのテキスト部分のみ取得
-        if type(abstract_element[e]) != str:
-            abstract = abstract_element[e].get_text().replace("\n","").replace("\t","").replace("抄録全体を表示","")
-        else:
-            abstract = abstract_element[e]
-        # authortagsのテキスト部分飲み取得
-        author = authortags_element[e].get_text().replace("\n","").replace("\t","")
-        # additionalのテキスト部分飲み取得
-        additional = additional_element[e].get_text().replace("\n","").replace("\t","")
+    for q in range(n_papers):
+        title = title_url_element[q].get_text() 
+        url = title_url_element[q].get('href').replace('/url?q=','')
+
+        check = lambda a: a[0].get_text().replace("\n","").replace("\t","").replace("抄録全体を表示","") if( len(a)== 1) else "None"
+        abstract_check =lambda a: a[0].get_text().replace("\n","").replace("\t","").replace("抄録全体を表示","") if( len(a)== 1) else title_url_element[q].get_text()
+
+        abstract=abstract_check(soup.select("#search-resultslist-wrap > ul > li:nth-of-type("+ str(q+1) + ") > div.showabstractbox.content > div.inner-content.abstract"))
+        author=check(soup.select("#search-resultslist-wrap > ul > li:nth-of-type("+ str(q+1) + ") > div.searchlist-authortags.customTooltip"))
+        additional=check(soup.select("#search-resultslist-wrap > ul > li:nth-of-type("+ str(q+1) + ") > div.searchlist-additional-info"))
+        
         search_results_list.append([title, url, abstract, author, additional])
+    
+    print("result_got\t",len(search_results_list))
 
     return list(zip(*search_results_list))
