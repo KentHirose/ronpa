@@ -64,10 +64,12 @@
 
         window.onmousewheel = function(event) {
             if (event.deltaY > 0) {
-                scale = Math.min(5, scale + 0.1);
+                scale = Math.min(4, scale + 0.1);
             } else {
                 scale = Math.max(0.3, scale - 0.1);
             }
+            offsetX = Math.sign(offsetX) * Math.min(Math.abs(offsetX), scale*w/2);
+            offsetY = Math.sign(offsetY) * Math.min(Math.abs(offsetY), scale*h/2);
             plot(scale);
         };
 
