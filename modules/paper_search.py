@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import urllib.parse
-from tours import lang_judg
+from tours import lang_judge
 
 def search(
     query: str,
@@ -59,6 +59,6 @@ def search(
     print("result_got\t",len(search_results_list))
 
     all_info = list(zip(*search_results_list))
-    result = lang_judg(all_info)
+    result = lang_judge(all_info)
 
     return result
