@@ -80,7 +80,7 @@ def lang_judg(search_results_list: list) -> list:
 
     # 何らかの処理
 
-    return result
+    return search_results_list
 
 def make_balloon(writer, additional):
     return [f'著者:{w}\n\n{add}' for w, add in zip(writer, additional)]
