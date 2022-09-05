@@ -54,7 +54,7 @@ def intervel(data: np.ndarray) -> np.ndarray:
                         data[i][1]-=0.1
     return data
 
-def lang_judg(search_results_list: list) -> list:
+def lang_judge(search_results_list: list) -> list:
     """アブストラクトが英語かどうかを判定し、英語だった場合タイトルに置き換える"""
 
     # 前回送ってくれたやつ (動かなかった) ----------------------------------------------
